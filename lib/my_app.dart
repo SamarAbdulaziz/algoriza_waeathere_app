@@ -16,12 +16,12 @@ class WeatherApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) =>
-              sl<WeatherCubit>()..getWeatherByCityName('Alexandria'),
-          //..getWeatherDetailsByCityNameUseCase('Alexandria'),
+              sl<WeatherCubit>()
+                //..getWeatherByCityName('Alexandria'),
         ),
         BlocProvider(
           create: (context) => sl<WeatherDetailsCubit>()
-            ..getWeatherDetailsByCityNameUseCase('Alexandria'),
+            ..getWeatherDetailsByCityName('Alexandria'),
         ),
       ],
       child: MaterialApp(

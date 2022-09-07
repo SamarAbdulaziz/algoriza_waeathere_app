@@ -4,8 +4,19 @@ import 'package:weather/core/utiles/app_colors.dart';
 import 'package:weather/features/weather/presentaion/controllers/weather_cubit.dart';
 import 'package:weather/features/weather/presentaion/screens/manage_settings_screen.dart';
 
-class MyDrawer extends StatelessWidget {
+class MyDrawer extends StatefulWidget {
   const MyDrawer({Key? key}) : super(key: key);
+
+  @override
+  State<MyDrawer> createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<WeatherCubit>(context).getWeatherByCityName('Alexandria');
+  }
 
   @override
   Widget build(BuildContext context) {

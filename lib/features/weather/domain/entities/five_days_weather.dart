@@ -12,21 +12,21 @@ class FiveDaysWeather extends Equatable {
 
   const FiveDaysWeather(
       {required this.code,
-      required this.listOfFiveDays,
-      required this.id,
-      required this.cityName,
-      required this.country,
-      required this.sunrise,
-      required this.sunset});
+        required this.listOfFiveDays,
+        required this.id,
+        required this.cityName,
+        required this.country,
+        required this.sunrise,
+        required this.sunset});
 
   @override
   List<Object> get props => [
-        code,
-        listOfFiveDays,
-        id,
-        cityName,
-        country,
-        sunrise,
-        sunset,
-      ];
+    code,
+    listOfFiveDays,
+    id,
+    cityName,
+    country,
+    sunrise,
+    sunset,
+  ];
 }

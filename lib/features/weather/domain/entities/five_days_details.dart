@@ -12,6 +12,7 @@ class FiveDaysDetails extends Equatable {
   final String icon;
   final int windSpeed;
   final String dateTime;
+  final int pop;
 
   const FiveDaysDetails({
     required this.temp,
@@ -25,6 +26,7 @@ class FiveDaysDetails extends Equatable {
     required this.icon,
     required this.windSpeed,
     required this.dateTime,
+    required this.pop,
   });
 
   @override
@@ -41,5 +43,6 @@ class FiveDaysDetails extends Equatable {
         icon,
         windSpeed,
         dateTime,
+        pop,
       ];
 }

@@ -6,7 +6,7 @@ import 'package:weather/features/weather/domain/entities/five_days_details.dart'
 class FiveDayWeatherModel extends FiveDaysWeather {
   const FiveDayWeatherModel({
     required final String code,
-    required final List<FiveDaysDetails> listOfFiveDays,
+    required final List<FiveDaysDetails> fiveDaysDetails,
     required final int id,
     required final String cityName,
     required final String country,
@@ -14,7 +14,7 @@ class FiveDayWeatherModel extends FiveDaysWeather {
     required final String sunset
   }) :super(
     code: code,
-    listOfFiveDays:listOfFiveDays,
+    listOfFiveDays:fiveDaysDetails,
     id: id,
     cityName: cityName,
     country: country,
@@ -27,8 +27,8 @@ class FiveDayWeatherModel extends FiveDaysWeather {
   factory FiveDayWeatherModel.fromJson(Map<String, dynamic> json) {
     return FiveDayWeatherModel(
       code: json['cod'],
-     listOfFiveDays:List<FiveDaysDetails>.from(json['list'].map((e)=>ListOfFiveDaysModel.fromJson(e))) ,
-     id: json['city']['id'],
+      fiveDaysDetails:List<FiveDaysDetails>.from(json['list'].map((e)=>FiveDaysDetailsModel.fromJson(e))) ,
+      id: json['city']['id'],
       cityName: json['city']['name'],
       country: json['city']['country'],
       sunrise: convertTimestampIntoDatetime(json['city']['sunrise']),
