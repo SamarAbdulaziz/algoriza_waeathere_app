@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/core/utiles/app_colors.dart';
-import 'package:weather/features/weather/presentaion/controllers/weather_cubit.dart';
+import 'package:weather/features/weather/presentaion/controllers/new_weather_cubit.dart';
+import 'package:weather/features/weather/presentaion/controllers/new_weather_state.dart';
 
-class UvWindHumidityComponent extends StatefulWidget {
+class UvWindHumidityComponent extends StatelessWidget {
   const UvWindHumidityComponent({Key? key}) : super(key: key);
 
-  @override
-  State<UvWindHumidityComponent> createState() => _UvWindHumidityComponentState();
-}
 
-class _UvWindHumidityComponentState extends State<UvWindHumidityComponent> {
-  void initState() {
-    BlocProvider.of<WeatherCubit>(context).getWeatherByCityName('Alexandria');
-  }
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WeatherCubit, WeatherStates>(
+    return BlocBuilder<NewWeatherCubit, NewWeatherStates>(
       builder: (context, state) {
-        if (state is WeatherInitialState) {
+        if (state is NewWeatherLoadingState) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is WeatherLoadedState) {
+        } else if (state is NewWeatherLoadedState) {
           return Container(
             padding: const EdgeInsets.all(10.0),
             margin: const EdgeInsets.all(20.0),
@@ -77,7 +71,7 @@ class _UvWindHumidityComponentState extends State<UvWindHumidityComponent> {
                       ),
                     ),
                     Text(
-                      '${state.weather.windSpeed}km/h',
+                      '${state.newWeather.current.windKph}km/h',
                       style: const TextStyle(
                         fontSize: 14.0,
                         color: Colors.grey,
@@ -105,7 +99,7 @@ class _UvWindHumidityComponentState extends State<UvWindHumidityComponent> {
                       ),
                     ),
                     Text(
-                      '${state.weather.humidity}%',
+                      '${state.newWeather.current.humidity}%',
                       style: const TextStyle(
                         fontSize: 14.0,
                         color: Colors.grey,
@@ -116,12 +110,10 @@ class _UvWindHumidityComponentState extends State<UvWindHumidityComponent> {
               ],
             ),
           );
-        } else if (state is WeatherErrorState) {
+        } else if (state is NewWeatherErrorState) {
           return Text(state.errorMessage);
         } else {
-          return const Center(
-            child: Text('Error'),
-          );
+          return Container();
         }
       },
     );

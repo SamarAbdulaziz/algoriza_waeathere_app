@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/core/utiles/app_colors.dart';
-import 'package:weather/features/weather/presentaion/controllers/weather_cubit.dart';
+import 'package:weather/features/weather/presentaion/controllers/new_weather_cubit.dart';
 
-class SunriseSunsetComponent extends StatefulWidget {
-  const SunriseSunsetComponent({Key? key}) : super(key: key);
+import '../controllers/new_weather_state.dart';
 
-  @override
-  State<SunriseSunsetComponent> createState() => _SunriseSunsetComponentState();
-}
+class SunriseSunsetComponent extends StatelessWidget {
 
-class _SunriseSunsetComponentState extends State<SunriseSunsetComponent> {
-  @override
-  void initState() {
-
-    BlocProvider.of<WeatherCubit>(context).getWeatherByCityName('Alexandria');
-  }
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WeatherCubit, WeatherStates>(
+    return BlocBuilder<NewWeatherCubit, NewWeatherStates>(
       builder: (context, state) {
-        if (state is WeatherInitialState) {
+        if (state is NewWeatherLoadingState) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is WeatherLoadedState) {
+        } else if (state is NewWeatherLoadedState) {
           return Container(
             padding: const EdgeInsets.all(10.0),
             margin: const EdgeInsets.all(5.0),
@@ -39,7 +30,7 @@ class _SunriseSunsetComponentState extends State<SunriseSunsetComponent> {
                       style: TextStyle(fontSize: 16.0),
                     ),
                     Text(
-                      state.weather.sunrise,
+                      state.newWeather.forecast.forecastDay[0].astro.sunrise,
                       style: const TextStyle(fontSize: 18.0),
                     ),
                     const Icon(
@@ -56,7 +47,7 @@ class _SunriseSunsetComponentState extends State<SunriseSunsetComponent> {
                       style: TextStyle(fontSize: 16.0),
                     ),
                     Text(
-                      state.weather.sunset,
+                      state.newWeather.forecast.forecastDay[0].astro.sunset,
                       style: const TextStyle(fontSize: 18.0),
                     ),
                     const Icon(
@@ -69,12 +60,10 @@ class _SunriseSunsetComponentState extends State<SunriseSunsetComponent> {
               ],
             ),
           );
-        } else if (state is WeatherErrorState) {
+        } else if (state is NewWeatherErrorState) {
           return Text(state.errorMessage);
         } else {
-          return const Center(
-            child: Text('Error'),
-          );
+          return Container();
         }
       },
     );

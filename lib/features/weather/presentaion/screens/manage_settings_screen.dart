@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather/core/utiles/app_colors.dart';
-import 'package:weather/features/weather/presentaion/controllers/weather_cubit.dart';
+import 'package:weather/features/weather/presentaion/controllers/new_weather_cubit.dart';
+import 'package:weather/features/weather/presentaion/controllers/new_weather_state.dart';
 import 'package:weather/features/weather/presentaion/screens/weather_screen.dart';
 
 class ManageSettingsScreen extends StatelessWidget {
@@ -9,19 +9,22 @@ class ManageSettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = BlocProvider.of<WeatherCubit>(context);
-    return BlocBuilder<WeatherCubit, WeatherStates>(
+    var cubit = BlocProvider.of<NewWeatherCubit>(context);
+    return BlocBuilder<NewWeatherCubit, NewWeatherStates>(
       builder: (context, state) {
         return Scaffold(
+          backgroundColor: Colors.black87,
           appBar: AppBar(
-            backgroundColor: AppColors.blueAppColor,
+            backgroundColor: Colors.black87,
             title: const Text('Manage Locations'),
             leading: IconButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const WeatherScreen()));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WeatherScreen(),
+                  ),
+                );
               },
               icon: const Icon(
                 Icons.arrow_back_ios,
@@ -31,18 +34,18 @@ class ManageSettingsScreen extends StatelessWidget {
           body: Container(
             padding: const EdgeInsets.all(16.0),
             child: TextFormField(
-              controller: cubit.searchController,
+              // controller: cubit.searchController,
               onChanged: (value) {
                 print(value);
                 //cubit.getWeatherByCityName(cubit.searchController.text);
                 //cubit.getWeatherByCityName(value);
               },
               onSaved: (value) {
-                cubit.searchController.text = value!;
+                 cubit.searchController.text = value!;
               },
               onFieldSubmitted: (String value) {
                 cubit.getWeatherByCityName(value);
-                cubit.searchController.clear();
+                 cubit.searchController.clear();
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -55,7 +58,7 @@ class ManageSettingsScreen extends StatelessWidget {
                   onPressed: () {},
                   icon: const Icon(Icons.search),
                 ),
-                fillColor: Colors.grey[200],
+                fillColor: Colors.grey[500],
                 filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15.0),

@@ -1,28 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/core/utiles/app_colors.dart';
-import 'package:weather/features/weather/presentaion/controllers/weather_cubit.dart';
+import 'package:weather/features/weather/presentaion/controllers/new_weather_cubit.dart';
+import 'package:weather/features/weather/presentaion/controllers/new_weather_state.dart';
 import 'package:weather/features/weather/presentaion/screens/manage_settings_screen.dart';
 
-class MyDrawer extends StatefulWidget {
-  const MyDrawer({Key? key}) : super(key: key);
-
-  @override
-  State<MyDrawer> createState() => _MyDrawerState();
-}
-
-class _MyDrawerState extends State<MyDrawer> {
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<WeatherCubit>(context).getWeatherByCityName('Alexandria');
-  }
+class MyDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WeatherCubit, WeatherStates>(
+    return BlocBuilder<NewWeatherCubit, NewWeatherStates>(
       builder: (context, state) {
-        if (state is WeatherLoadedState) {
+        if (state is NewWeatherLoadedState) {
           return Drawer(
             backgroundColor: AppColors.blueAppColor,
             shape: RoundedRectangleBorder(
@@ -40,9 +29,9 @@ class _MyDrawerState extends State<MyDrawer> {
                 child: Column(
                   children: [
                     Row(
-                      children: [
-                        const Spacer(),
-                        const Icon(Icons.settings),
+                      children: const[
+                         Spacer(),
+                         Icon(Icons.settings),
                       ],
                     ),
                     const SizedBox(
@@ -79,7 +68,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           size: 14.0,
                         ),
                         Text(
-                          state.weather.cityName,
+                          state.newWeather.location.name,
                           style: const TextStyle(
                             fontSize: 18.0,
                           ),
@@ -89,7 +78,7 @@ class _MyDrawerState extends State<MyDrawer> {
                           Icons.circle,
                           color: Colors.yellow,
                         ),
-                        Text('${state.weather.temp}\u00BA'),
+                        Text('${state.newWeather.current.tempC}\u00BA'),
                       ],
                     ),
                     const SizedBox(
@@ -155,7 +144,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const ManageSettingsScreen(),
+                            builder: (context) =>  const ManageSettingsScreen(),
                           ),
                         );
                       },

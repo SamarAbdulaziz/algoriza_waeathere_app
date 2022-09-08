@@ -1,34 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/core/utiles/app_colors.dart';
-import 'package:weather/features/weather/presentaion/controllers/weather_details_cubit.dart';
-import '../controllers/weather_details_state.dart';
+import 'package:weather/features/weather/presentaion/controllers/new_weather_cubit.dart';
+import 'package:weather/features/weather/presentaion/controllers/new_weather_state.dart';
 
-class DailyTable extends StatefulWidget {
-  const DailyTable({Key? key}) : super(key: key);
+class DailyTable extends StatelessWidget {
 
-  @override
-  State<DailyTable> createState() => _DailyTableState();
-}
-
-class _DailyTableState extends State<DailyTable> {
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<WeatherDetailsCubit>(context).getWeatherDetailsByCityName('Alexandria');
-
-  }
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WeatherDetailsCubit, WeatherDetailsStates>(
+    return BlocBuilder<NewWeatherCubit, NewWeatherStates>(
       builder: (context, state) {
-        if (state is WeatherDetailsLoadingState) {
-          return const SizedBox(
-            height: 100,
+        if (state is NewWeatherLoadingState) {
+          return const Center(
             child: CircularProgressIndicator(),
           );
-        }
-        else if (state is WeatherDetailsLoadedState) {
+        } else if (state is NewWeatherLoadedState) {
+          var list = state.newWeather.forecast.forecastDay;
+
           return Container(
             padding: const EdgeInsets.all(10.0),
             margin: const EdgeInsets.all(5.0),
@@ -39,18 +27,18 @@ class _DailyTableState extends State<DailyTable> {
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               padding: const EdgeInsets.all(0.0),
-              itemCount: 5,
+              itemCount: list.length,
               itemBuilder: (context, index) {
-                var list = state.fiveDaysWeather.listOfFiveDays;
                 var item = list[index];
-
                 return Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        const Text('day'),
-                        Text('${item.pop}% '),
+                        Text(
+                          item.dtDay,
+                        ),
+                        Text('${item.day.dailyChanceOfRain}% '),
                         const Icon(
                           Icons.circle,
                           color: Colors.yellow,
@@ -59,8 +47,8 @@ class _DailyTableState extends State<DailyTable> {
                           Icons.dark_mode,
                           color: Colors.yellow,
                         ),
-                        Text('${item.maxTemp}\u00BA'),
-                        Text('${item.minTemp}\u00BA'),
+                        Text('${item.day.maxtempC}\u00BA'),
+                        Text('${item.day.mintempC}\u00BA'),
                       ],
                     ),
                     const SizedBox(height: 5.0),

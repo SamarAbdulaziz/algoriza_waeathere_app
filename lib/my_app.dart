@@ -1,29 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather/features/weather/presentaion/controllers/weather_details_cubit.dart';
+import 'package:weather/core/services/new_service_locator.dart';
+import 'package:weather/features/weather/presentaion/controllers/new_weather_cubit.dart';
 import 'package:weather/features/weather/presentaion/screens/weather_screen.dart';
 
-import 'core/services/service_locator.dart';
-import 'features/weather/presentaion/controllers/weather_cubit.dart';
 
 class WeatherApp extends StatelessWidget {
   const WeatherApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) =>
-              sl<WeatherCubit>()
-                //..getWeatherByCityName('Alexandria'),
-        ),
-        BlocProvider(
-          create: (context) => sl<WeatherDetailsCubit>()
-            ..getWeatherDetailsByCityName('Alexandria'),
-        ),
-      ],
+    return BlocProvider(
+        create: (context) =>
+            sl<NewWeatherCubit>()
+       ..getWeatherByCityName('Alexandria'),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -41,7 +32,7 @@ class WeatherApp extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        home: const WeatherScreen(),
+        home:  WeatherScreen(),
       ),
     );
   }
