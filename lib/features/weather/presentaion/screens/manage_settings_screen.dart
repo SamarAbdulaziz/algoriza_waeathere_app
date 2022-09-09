@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather/core/utiles/app_colors.dart';
 import 'package:weather/features/weather/presentaion/controllers/new_weather_cubit.dart';
 import 'package:weather/features/weather/presentaion/controllers/new_weather_state.dart';
 import 'package:weather/features/weather/presentaion/screens/weather_screen.dart';
@@ -13,9 +14,10 @@ class ManageSettingsScreen extends StatelessWidget {
     return BlocBuilder<NewWeatherCubit, NewWeatherStates>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: Colors.black87,
+          backgroundColor: AppColors.blueAppColor,
           appBar: AppBar(
-            backgroundColor: Colors.black87,
+            backgroundColor: AppColors.blueAppColor,
+            elevation: 0.0,
             title: const Text('Manage Locations'),
             leading: IconButton(
               onPressed: () {
@@ -35,17 +37,18 @@ class ManageSettingsScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: TextFormField(
               // controller: cubit.searchController,
+              style: const TextStyle(color: Colors.black),
               onChanged: (value) {
-                print(value);
+                debugPrint(value);
                 //cubit.getWeatherByCityName(cubit.searchController.text);
                 //cubit.getWeatherByCityName(value);
               },
               onSaved: (value) {
-                 cubit.searchController.text = value!;
+                cubit.searchController.text = value!;
               },
               onFieldSubmitted: (String value) {
                 cubit.getWeatherByCityName(value);
-                 cubit.searchController.clear();
+                cubit.searchController.clear();
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
@@ -58,7 +61,8 @@ class ManageSettingsScreen extends StatelessWidget {
                   onPressed: () {},
                   icon: const Icon(Icons.search),
                 ),
-                fillColor: Colors.grey[500],
+                // fillColor: Colors.grey[500],
+                fillColor: Colors.grey[200],
                 filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15.0),
