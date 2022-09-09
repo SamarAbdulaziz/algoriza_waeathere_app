@@ -12,9 +12,7 @@ class UvWindHumidityComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<NewWeatherCubit, NewWeatherStates>(
       builder: (context, state) {
-        if (state is NewWeatherLoadingState) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (state is NewWeatherLoadedState) {
+       if (state is NewWeatherLoadedState) {
           return Container(
             padding: const EdgeInsets.all(10.0),
             margin: const EdgeInsets.all(20.0),
@@ -46,8 +44,9 @@ class UvWindHumidityComponent extends StatelessWidget {
                     Text(
                       //todo
                       'High',
-                      style:
-                          const TextStyle(fontSize: 14.0, color: Colors.grey),
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -73,8 +72,7 @@ class UvWindHumidityComponent extends StatelessWidget {
                     Text(
                       '${state.newWeather.current.windKph}km/h',
                       style: const TextStyle(
-                        fontSize: 14.0,
-                        color: Colors.grey,
+                        color: Colors.white,
                       ),
                     ),
                   ],
@@ -88,21 +86,19 @@ class UvWindHumidityComponent extends StatelessWidget {
                   children: [
                     const Icon(
                       Icons.water_drop,
-                      color: Colors.lightBlueAccent,
+                      color: Colors.blue,
                       size: 45.0,
                     ),
                     const Text(
                       'Humidity',
                       style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                          fontSize: 16.0, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       '${state.newWeather.current.humidity}%',
                       style: const TextStyle(
                         fontSize: 14.0,
-                        color: Colors.grey,
+                        color: Colors.white,
                       ),
                     ),
                   ],

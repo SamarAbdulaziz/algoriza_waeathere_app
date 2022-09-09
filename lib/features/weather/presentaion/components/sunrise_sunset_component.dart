@@ -11,15 +11,16 @@ class SunriseSunsetComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<NewWeatherCubit, NewWeatherStates>(
       builder: (context, state) {
-        if (state is NewWeatherLoadingState) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (state is NewWeatherLoadedState) {
+         if (state is NewWeatherLoadedState) {
           return Container(
             padding: const EdgeInsets.all(10.0),
             margin: const EdgeInsets.all(5.0),
             decoration: BoxDecoration(
-                color: AppColors.whiteWithOpacity,
-                borderRadius: BorderRadius.circular(20.0)),
+              color: AppColors.whiteWithOpacity,
+              borderRadius: BorderRadius.circular(
+                20.0,
+              ),
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

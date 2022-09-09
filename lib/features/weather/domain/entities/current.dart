@@ -7,6 +7,7 @@ class Current extends Equatable {
   final int windKph;
   final int humidity;
   final int feelslikeC;
+  final String icon;
 
   Current({
     required this.lastUpdatedEpoch,
@@ -15,15 +16,18 @@ class Current extends Equatable {
     required this.windKph,
     required this.humidity,
     required this.feelslikeC,
+    required this.icon,
   });
 
   @override
-  List<Object> get props => [
+  List<Object> get props =>
+      [
         lastUpdatedEpoch,
         lastUpdated,
         tempC,
         windKph,
         humidity,
         feelslikeC,
+        icon,
       ];
 }

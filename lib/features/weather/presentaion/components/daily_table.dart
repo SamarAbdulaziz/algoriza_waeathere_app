@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:weather/core/utiles/app_colors.dart';
 import 'package:weather/features/weather/presentaion/controllers/new_weather_cubit.dart';
 import 'package:weather/features/weather/presentaion/controllers/new_weather_state.dart';
 
 class DailyTable extends StatelessWidget {
+  String currentDay = DateFormat('EEEE').format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewWeatherCubit, NewWeatherStates>(
       builder: (context, state) {
-        if (state is NewWeatherLoadingState) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (state is NewWeatherLoadedState) {
+        if (state is NewWeatherLoadedState) {
           var list = state.newWeather.forecast.forecastDay;
 
           return Container(
@@ -35,20 +33,48 @@ class DailyTable extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(
-                          item.dtDay,
+                        SizedBox(
+                          width: 85.0,
+                          child: Text(
+                            item.dtDay == currentDay ? 'Today' : item.dtDay,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                        Text('${item.day.dailyChanceOfRain}% '),
-                        const Icon(
-                          Icons.circle,
-                          color: Colors.yellow,
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.water_drop,
+                              size: 14,
+                              color: Colors.white60,
+                            ),
+                            Text('${item.day.dailyChanceOfRain}% '),
+                          ],
+                        ),
+                        Image.network(
+                          'https:${item.day.icon}',
+                          scale: 1.7,
                         ),
                         const Icon(
                           Icons.dark_mode,
                           color: Colors.yellow,
                         ),
-                        Text('${item.day.maxtempC}\u00BA'),
-                        Text('${item.day.mintempC}\u00BA'),
+                        Text(
+                          '${item.day.maxtempC}\u00BA',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '${item.day.mintempC}\u00BA',
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 5.0),
@@ -57,8 +83,9 @@ class DailyTable extends StatelessWidget {
               },
             ),
           );
-        }
-        else {
+        } else if (state is NewWeatherErrorState) {
+          return Text(state.errorMessage);
+        } else {
           return const SizedBox();
         }
       },

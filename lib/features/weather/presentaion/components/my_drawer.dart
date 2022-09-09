@@ -220,7 +220,8 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
           );
-        } else {
+        }
+        else {
           return const Drawer();
         }
       },

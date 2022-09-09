@@ -8,13 +8,15 @@ class CurrentModel extends Current {
     required final int windKph,
     required final int humidity,
     required final int feelslikeC,
+    required final String icon,
   }) : super(
-          lastUpdatedEpoch: lastUpdatedEpoch,
+    lastUpdatedEpoch: lastUpdatedEpoch,
           lastUpdated: lastUpdated,
           tempC: tempC,
           windKph: windKph,
           feelslikeC: feelslikeC,
           humidity: humidity,
+          icon: icon,
         );
 
   factory CurrentModel.fromJson(Map<String, dynamic> json) => CurrentModel(
@@ -24,6 +26,7 @@ class CurrentModel extends Current {
         windKph: json["wind_kph"].round(),
         humidity: json["humidity"],
         feelslikeC: json["feelslike_c"].round(),
+        icon: json["condition"]["icon"],
       );
 
 }

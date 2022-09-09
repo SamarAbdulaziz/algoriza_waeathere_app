@@ -7,11 +7,14 @@ class HourModel extends Hour {
     required String time,
     required int tempC,
     required int chanceOfRain,
+    required final String icon,
   }) : super(
-            time: time,
-            timeEpoch: timeEpoch,
-            tempC: tempC,
-            chanceOfRain: chanceOfRain);
+          time: time,
+          timeEpoch: timeEpoch,
+          tempC: tempC,
+          chanceOfRain: chanceOfRain,
+          icon: icon,
+        );
 
   factory HourModel.fromJson(Map<String, dynamic> json) => HourModel(
         // timeEpoch: convertTimestampIntoDatetime(json["time_epoch"]),
@@ -19,5 +22,6 @@ class HourModel extends Hour {
         time: json["time"],
         tempC: json["temp_c"].round(),
         chanceOfRain: json["chance_of_rain"],
+        icon: json["condition"]['icon'],
       );
 }

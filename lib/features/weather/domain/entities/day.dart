@@ -4,11 +4,13 @@ class Day extends Equatable {
   final int maxtempC;
   final int mintempC;
   final int dailyChanceOfRain;
+  final String icon;
 
   Day({
     required this.maxtempC,
     required this.mintempC,
     required this.dailyChanceOfRain,
+    required this.icon,
   });
 
   @override
@@ -16,5 +18,6 @@ class Day extends Equatable {
         maxtempC,
         mintempC,
         dailyChanceOfRain,
+        icon,
       ];
 }
