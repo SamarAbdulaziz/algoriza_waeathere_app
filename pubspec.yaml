@@ -41,6 +41,10 @@ dependencies:
   intl: ^0.17.0
   equatable: ^2.0.5
   dartz: ^0.10.1
+  syncfusion_flutter_charts: ^20.2.48
+  geolocator: ^9.0.1
+  location: ^4.4.0
+  geocoding: ^2.0.5
 
 dev_dependencies:
   flutter_test:
