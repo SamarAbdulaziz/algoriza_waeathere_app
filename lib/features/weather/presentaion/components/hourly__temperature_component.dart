@@ -26,7 +26,7 @@ class HourlyTemperatureComponent extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 5,
+                  height: MediaQuery.of(context).size.height /6,
                   child: ListView.builder(
                     // physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -48,7 +48,7 @@ class HourlyTemperatureComponent extends StatelessWidget {
                             ),
                             Image.network(
                               'https:${item.hour[index].icon}',
-                              scale: 1.6,
+                              scale: 1.4,
                             ),
 
                             Text(

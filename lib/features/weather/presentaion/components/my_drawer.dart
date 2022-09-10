@@ -68,23 +68,29 @@ class MyDrawer extends StatelessWidget {
                           Icons.location_on,
                           size: 14.0,
                         ),
-                        Text(
-                          state.newWeather.location.name,
-                          style: const TextStyle(
-                            fontSize: 18.0,
+                        InkWell(
+                          onTap: () {
+                            BlocProvider.of<NewWeatherCubit>(context)
+                                .getWeatherByCityName('Alexandria');
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            'Alexandria',
+                            style: const TextStyle(
+                              fontSize: 18.0,
+                            ),
                           ),
                         ),
                         const Spacer(),
-                        const Icon(
-                          Icons.circle,
-                          color: Colors.yellow,
+                        Image.network(
+                          'https:${state.newWeather.current.icon}',
                         ),
                         Text('${state.newWeather.current.tempC}\u00BA'),
                       ],
                     ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
+                    // const SizedBox(
+                    //   height: 20.0,
+                    // ),
                     const Divider(
                       color: Colors.white,
                       thickness: 0.7,
@@ -113,32 +119,42 @@ class MyDrawer extends StatelessWidget {
                     const SizedBox(
                       height: 20.0,
                     ),
-                    Row(
-                      children: const [
-                        SizedBox(
-                          width: 20.0,
-                        ),
-                        Icon(
-                          Icons.location_on,
-                          size: 14.0,
-                        ),
-                        Text(
-                          'Tanta',
-                          style: TextStyle(
-                            fontSize: 18.0,
+                    InkWell(
+                      onTap: () {
+                        BlocProvider.of<NewWeatherCubit>(context)
+                            .getWeatherByCityName('Tanta');
+                        Navigator.pop(context);
+                      },
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 20.0,
                           ),
-                        ),
-                        Spacer(),
-                        Icon(
-                          Icons.circle,
-                          color: Colors.yellow,
-                        ),
-                        Text('33\u00BA'),
-                      ],
+                          const Icon(
+                            Icons.location_on,
+                            size: 14.0,
+                          ),
+                          const Text(
+                            'Tanta',
+                            style: TextStyle(
+                              fontSize: 18.0,
+                            ),
+                          ),
+                          const Spacer(),
+                          // Icon(
+                          //   Icons.circle,
+                          //   color: Colors.yellow,
+                          // ),
+                          Image.network(
+                            'https:${state.newWeather.current.icon}',
+                          ),
+                          const Text('21\u00BA'),
+                        ],
+                      ),
                     ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
+                    // const SizedBox(
+                    //   height: 20.0,
+                    // ),
                     MaterialButton(
                       onPressed: () {
                         Navigator.pop;

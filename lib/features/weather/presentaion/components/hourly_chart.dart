@@ -16,7 +16,7 @@ class HourlyChart extends StatelessWidget {
           List<Hour> hour = state.newWeather.forecast.forecastDay[0].hour;
 
           return SizedBox(
-            height: 80.0,
+            height: 50.0,
             width: MediaQuery.of(context).size.width,
             child: SfCartesianChart(
               plotAreaBorderColor: Colors.transparent,
