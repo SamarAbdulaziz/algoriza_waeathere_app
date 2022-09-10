@@ -6,6 +6,7 @@ import 'package:weather/features/weather/presentaion/controllers/new_weather_sta
 import 'package:weather/features/weather/presentaion/screens/manage_settings_screen.dart';
 
 class MyDrawer extends StatelessWidget {
+  const MyDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +30,9 @@ class MyDrawer extends StatelessWidget {
                 child: Column(
                   children: [
                     Row(
-                      children: const[
-                         Spacer(),
-                         Icon(Icons.settings),
+                      children: const [
+                        Spacer(),
+                        Icon(Icons.settings),
                       ],
                     ),
                     const SizedBox(
@@ -122,7 +123,7 @@ class MyDrawer extends StatelessWidget {
                           size: 14.0,
                         ),
                         Text(
-                          'City Name',
+                          'Tanta',
                           style: TextStyle(
                             fontSize: 18.0,
                           ),
@@ -144,7 +145,7 @@ class MyDrawer extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>  const ManageSettingsScreen(),
+                            builder: (context) => ManageSettingsScreen(),
                           ),
                         );
                       },

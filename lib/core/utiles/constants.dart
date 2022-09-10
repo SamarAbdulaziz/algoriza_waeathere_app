@@ -1,12 +1,14 @@
 class AppConstants{
   static const String baseUrl='https://api.openweathermap.org/data/2.5';
   static const String apiKey='148ed91fbbb09faf739bdfb485d07279';
-  static  String getWeatherByCityNamePath(String cityName)=>'$baseUrl/weather?q=$cityName&units=metric&appid=$apiKey';
-  static  String getWeatherDetailsByCityNamePath(String cityName)=>'$baseUrl/forecast?q=$cityName&units=metric&appid=$apiKey';
+  // static  String getWeatherByCityNamePath(String cityName)=>'$baseUrl/weather?q=$cityName&units=metric&appid=$apiKey';
+  // static  String getWeatherDetailsByCityNamePath(String cityName)=>'$baseUrl/forecast?q=$cityName&units=metric&appid=$apiKey';
 
    static const String baseUrlNew='https://api.weatherapi.com/v1';
   static const String apiKeyNew='fe8322e4b42e4259a85234610220709';
   static  String getWeatherByCityNamePathNew(String cityName)=>'$baseUrlNew/forecast.json?key=$apiKeyNew&q=$cityName&days=7&aqi=no&alerts=no';
+  // static  String getWeatherByCoordinatesPathNew(double lat,double long)=>'$baseUrlNew/forecast.json?key=$apiKeyNew&q=$lat,$long&days=7&aqi=no&alerts=no';
+
 
 
 }

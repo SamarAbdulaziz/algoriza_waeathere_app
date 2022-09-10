@@ -7,6 +7,7 @@ import 'package:weather/features/weather/data/models/new_weather_model.dart';
 
 abstract class BaseRemoteDataSourceNew {
   Future<NewWeatherModel> getWeatherByCityName(String cityName);
+  // Future<NewWeatherModel> getWeatherByCoordinates(double lat,double long);
 }
 
 
@@ -24,5 +25,18 @@ class RemoteDataSourceNew implements BaseRemoteDataSourceNew {
       throw ServerException(errorModel: ErrorModel.fromJson(response.data));
     }
   }
+
+  // @override
+  // Future<NewWeatherModel> getWeatherByCoordinates(double lat, double long) async {
+  //   var dio = Dio();
+  //   final response =
+  //       await dio.get(AppConstants.getWeatherByCoordinatesPathNew(lat,long));
+  //   //debugPrint(response.data);
+  //   if (response.statusCode == 200) {
+  //     return NewWeatherModel.fromJson(response.data);
+  //   } else {
+  //     throw ServerException(errorModel: ErrorModel.fromJson(response.data));
+  //   }
+  // }
 
 }

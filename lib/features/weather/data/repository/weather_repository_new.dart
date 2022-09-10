@@ -27,4 +27,20 @@ class WeatherRepositoryNew implements BaseWeatherRepositoryNew {
     }
   }
 
+  // @override
+  // Future<Either<Failure, NewWeather>> getWeatherByCoordinates(double lat, double long) async {
+  //   final result =await baseRemoteDataSourceNew.getWeatherByCoordinates(lat,long);
+  //   try{
+  //     // debugPrint(result.cityName);
+  //     // debugPrint(result.temp.toString());
+  //     // debugPrint(result.minTemp.toString());
+  //     // debugPrint(result.maxTemp.toString());
+  //     return Right(result);
+  //   }on ServerException catch(failure){
+  //     debugPrint(failure.errorModel.message);
+  //
+  //     return Left(ServerFailure(failure.errorModel.message));
+  //   }
+  // }
+
 }

@@ -17,7 +17,7 @@ class WeatherScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer:  MyDrawer(),
+      drawer:  const MyDrawer(),
       backgroundColor: AppColors.blueAppColor,
       body: CustomScrollView(
         slivers: [

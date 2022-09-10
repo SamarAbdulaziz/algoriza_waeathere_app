@@ -6,12 +6,11 @@ import 'package:weather/features/weather/presentaion/controllers/new_weather_cub
 import 'package:weather/features/weather/presentaion/controllers/new_weather_state.dart';
 
 class WeatherSliverAppBar extends StatelessWidget {
-
+   WeatherSliverAppBar({Key? key}) : super(key: key);
 
   String currentDay = DateFormat('EEE').format(DateTime.now());
   String currentTime = DateFormat.jm().format(DateTime.now());
 
-  WeatherSliverAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +18,13 @@ class WeatherSliverAppBar extends StatelessWidget {
       expandedHeight: MediaQuery.of(context).size.height / 3,
       backgroundColor: AppColors.blueAppColor,
       elevation: 0.0,
-      pinned: true,
-      stretch: true,
+       pinned: true,
+       stretch: true,
       flexibleSpace: BlocBuilder<NewWeatherCubit, NewWeatherStates>(
         builder: (context, state) {
           if (state is NewWeatherLoadedState) {
             return FlexibleSpaceBar(
+              expandedTitleScale:1.0,
               title: Row(
                 children: [
                   Text(
@@ -36,54 +36,56 @@ class WeatherSliverAppBar extends StatelessWidget {
                   ),
                   const Icon(
                     Icons.location_on,
-                  color: Colors.white,
-                )
-              ],
-            ),
-            collapseMode: CollapseMode.none,
-            background: Container(
-              margin:
-              const EdgeInsets.only(top: 100.0, left: 30.0, right: 30.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                    color: Colors.white,
+                  )
+                ],
+              ),
+              //collapseMode: CollapseMode.none,
+              background: Container(
+                margin: const EdgeInsets.only(
+                  top: 80.0,
+                  left: 30.0,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           '${state.newWeather.current.tempC}\u2103',
                           style: const TextStyle(
-                            fontSize: 60.0,
+                            fontSize: 50.0,
                             color: Colors.white,
                           ),
                         ),
-                        const Spacer(),
-                        Image.network('https:${state.newWeather.current.icon}')
+                        Image.network(
+                          'https:${state.newWeather.current.icon}',
+                          scale: 0.7,
+                        )
                       ],
-                    ),
-                    const SizedBox(
-                      height: 25.0,
                     ),
                     Text(
                       '${state.newWeather.forecast.forecastDay[0].day.maxtempC}\u00BA'
                       '/${state.newWeather.forecast.forecastDay[0].day.mintempC}\u00BA '
                       'Feels Like ${state.newWeather.current.feelslikeC}\u00BA',
-                      style: const TextStyle(
-                          fontSize: 18.0, fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.w500),
                     ),
                     Text(
                       '$currentDay,$currentTime',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ],
                 ),
-            ),
-          );}
-          else if (state is NewWeatherErrorState) {
+              ),
+            );
+          } else if (state is NewWeatherErrorState) {
             return Text(state.errorMessage);
           } else {
-            return  Container();
+            return Container();
           }
-
         },
       ),
     );

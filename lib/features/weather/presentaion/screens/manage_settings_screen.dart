@@ -6,11 +6,23 @@ import 'package:weather/features/weather/presentaion/controllers/new_weather_sta
 import 'package:weather/features/weather/presentaion/screens/weather_screen.dart';
 
 class ManageSettingsScreen extends StatelessWidget {
-  const ManageSettingsScreen({Key? key}) : super(key: key);
+  ManageSettingsScreen({Key? key}) : super(key: key);
+  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     var cubit = BlocProvider.of<NewWeatherCubit>(context);
+    void _onTextFieldSubmitted(String value) {
+      cubit.getWeatherByCityName(value);
+      searchController.clear();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => WeatherScreen(),
+        ),
+      );
+    }
+
     return BlocBuilder<NewWeatherCubit, NewWeatherStates>(
       builder: (context, state) {
         return Scaffold(
@@ -36,31 +48,23 @@ class ManageSettingsScreen extends StatelessWidget {
           body: Container(
             padding: const EdgeInsets.all(16.0),
             child: TextFormField(
-              // controller: cubit.searchController,
+              controller: searchController,
               style: const TextStyle(color: Colors.black),
-              onChanged: (value) {
-                debugPrint(value);
-                //cubit.getWeatherByCityName(cubit.searchController.text);
-                //cubit.getWeatherByCityName(value);
-              },
-              onSaved: (value) {
-                cubit.searchController.text = value!;
-              },
               onFieldSubmitted: (String value) {
-                cubit.getWeatherByCityName(value);
-                cubit.searchController.clear();
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => WeatherScreen(),
-                  ),
-                );
+                searchController.text = value;
+                // debugPrint(searchController.text);
+                // cubit.getWeatherByCityName(searchController.text);
+                // searchController.clear();
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => WeatherScreen(),
+                //   ),
+                // );
+                _onTextFieldSubmitted(value);
               },
               decoration: InputDecoration(
-                suffixIcon: IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.search),
-                ),
+                suffixIcon: const Icon(Icons.search),
                 // fillColor: Colors.grey[500],
                 fillColor: Colors.grey[200],
                 filled: true,
@@ -77,9 +81,11 @@ class ManageSettingsScreen extends StatelessWidget {
     );
   }
 }
-/*  Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => WeatherScreen(),
-                  ),
-                );*/
+/*// onChanged: (value) {
+              //   //debugPrint(value);
+              //   //cubit.getWeatherByCityName(cubit.searchController.text);
+              //   //cubit.getWeatherByCityName(value);
+              // },
+              // onSaved: (value) {
+              //   //searchController.text = value!;
+              // },*/

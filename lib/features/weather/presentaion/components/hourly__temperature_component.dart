@@ -43,7 +43,7 @@ class HourlyTemperatureComponent extends StatelessWidget {
                             //todo edit to start by the hour of now
                             Text(
                               item.hour[index].timeEpoch,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 12, fontWeight: FontWeight.bold),
                             ),
                             Image.network(
@@ -53,12 +53,12 @@ class HourlyTemperatureComponent extends StatelessWidget {
 
                             Text(
                               '${item.hour[index].tempC}\u00BA',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.water_drop,
                                   size: 14,
                                   color: Colors.white60,

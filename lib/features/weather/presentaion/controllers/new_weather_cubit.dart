@@ -1,7 +1,6 @@
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:weather/core/errors/failure.dart';
 import 'package:weather/features/weather/domain/entities/new_weather.dart';
 import 'package:weather/features/weather/domain/usecases/get_weather_by_country_name_use_case_new.dart';
@@ -9,6 +8,7 @@ import 'package:weather/features/weather/presentaion/controllers/new_weather_sta
 
 class NewWeatherCubit extends Cubit<NewWeatherStates> {
   final GetWeatherByCityNameUseCaseNew getWeatherByCityNameUseCaseNew;
+  // final GetWeatherByCoordinatesUseCaseNew getWeatherByCoordinatesUseCaseNew;
 
   NewWeatherCubit(
     this.getWeatherByCityNameUseCaseNew,
@@ -22,8 +22,15 @@ class NewWeatherCubit extends Cubit<NewWeatherStates> {
         (failure) => emit(NewWeatherErrorState(errorMessage: failure.massage)),
         (newWeather) => emit(NewWeatherLoadedState(newWeather: newWeather)));
   }
+ //
+ // Future<void> getWeatherByCoordinates( double lat,  double long) async {
+ //    emit(NewWeatherLoadingState());//to let the circular progress indecator show up
+ //    Either<Failure, NewWeather> response =
+ //        await getWeatherByCoordinatesUseCaseNew(lat,long);
+ //    response.fold(
+ //        (failure) => emit(NewWeatherErrorState(errorMessage: failure.massage)),
+ //        (newWeather) => emit(NewWeatherLoadedState(newWeather: newWeather)));
+ //  }
+ //
 
-
-
-  TextEditingController searchController = TextEditingController();
 }
